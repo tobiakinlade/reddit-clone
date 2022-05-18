@@ -15,8 +15,10 @@ import {
   SearchCircleIcon,
 } from '@heroicons/react/outline'
 import Image from 'next/image'
+import { signIn, signOut, useSession } from 'next-auth/react'
 
 function Header() {
+  const { data: session } = useSession()
   return (
     <div className="sticky top-0 z-50 flex bg-white px-4 py-2 shadow-sm">
       <div className="relative h-10 w-20 flex-shrink-0 cursor-pointer">
@@ -58,18 +60,39 @@ function Header() {
       </div>
 
       {/* singin singout */}
-      <div className="hidden items-center space-x-2 border border-gray-100 p-2  lg:flex">
-        <div className="relative h-5 w-5 flex-shrink-0 ">
-          <Image
-            layout="fill"
-            objectFit="contain"
-            src="https://links.papareact.com/23l"
-            height={5}
-            width={5}
-          />
+      {session ? (
+        <div
+          onClick={() => signOut()}
+          className="hidden cursor-pointer items-center space-x-2 border border-gray-100 p-2  lg:flex"
+        >
+          <div className="relative h-5 w-5 flex-shrink-0 ">
+            <Image
+              layout="fill"
+              objectFit="contain"
+              src="https://links.papareact.com/23l"
+              height={5}
+              width={5}
+            />
+          </div>
+          <p className="text-gray-400">Sing Out</p>
         </div>
-        <p className="text-gray-400">Sing In</p>
-      </div>
+      ) : (
+        <div
+          onClick={() => signIn()}
+          className="hidden cursor-pointer items-center space-x-2 border border-gray-100 p-2  lg:flex"
+        >
+          <div className="relative h-5 w-5 flex-shrink-0 ">
+            <Image
+              layout="fill"
+              objectFit="contain"
+              src="https://links.papareact.com/23l"
+              height={5}
+              width={5}
+            />
+          </div>
+          <p className="text-gray-400">Sing In</p>
+        </div>
+      )}
     </div>
   )
 }
