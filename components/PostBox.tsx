@@ -111,6 +111,7 @@ function PostBox() {
       })
     }
   })
+
   return (
     <form
       onSubmit={onSubmit}
@@ -177,11 +178,11 @@ function PostBox() {
           {/* Errors */}
           {Object.keys(errors).length > 0 && (
             <div className="space-y-2 p-2 text-red-500">
-              {errors.postTitle?.type === 'requires' && (
-                <p>= A Post Title is required</p>
+              {errors.postTitle?.type === 'required' && (
+                <p> A Post Title is required</p>
               )}
-              {errors.subreddit?.type === 'requires' && (
-                <p>= A Post Title is required</p>
+              {errors.subreddit?.type === 'required' && (
+                <p> A subreddit is required</p>
               )}
             </div>
           )}
